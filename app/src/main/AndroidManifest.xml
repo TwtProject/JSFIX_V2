@@ -16,6 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".create_pin"></activity>
+        <activity android:name=".in_pin"></activity>
     </application>
 
 </manifest>
