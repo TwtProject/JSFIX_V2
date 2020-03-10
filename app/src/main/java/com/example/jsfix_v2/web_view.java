@@ -11,12 +11,20 @@ public class web_view extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        String newLink;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.web_view);
 
+        newLink = getIncomeUrl();
         webView = (WebView) findViewById(R.id.webview);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("https://www.google.com");
+        webView.loadUrl(newLink);
+    }
+    private String getIncomeUrl(){
+        if (getIntent().hasExtra("link_url")){
+            String link = getIntent().getStringExtra("link_url");
+            return link;
+        }
+        return null;
     }
 }
