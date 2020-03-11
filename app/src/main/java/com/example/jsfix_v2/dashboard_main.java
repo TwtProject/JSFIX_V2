@@ -69,22 +69,6 @@ public class dashboard_main extends AppCompatActivity {
             }
         }, 2500, 2500);
 
-        whatsapp = (CardView) findViewById(R.id.whatsapp);
-        whatsapp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String pesan = "Testing whatsapp";
-
-                Intent kirimWA = new Intent(Intent.ACTION_SEND);
-                kirimWA.setType("text/plain");
-                kirimWA.putExtra(Intent.EXTRA_TEXT, pesan);
-                kirimWA.putExtra("jid", "6282112927843" + "@s.whatsapp.net");
-                kirimWA.setPackage("com.whatsapp");
-
-                startActivity(kirimWA);
-            }
-        });
-
     }
     @SuppressLint("StaticFieldLeak")
     private void fetchJSON(){
@@ -111,6 +95,24 @@ public class dashboard_main extends AppCompatActivity {
         }.execute();
     }
 
+    private void sendWhatsapp(final String NoWa, final String isi){
+        whatsapp = (CardView) findViewById(R.id.whatsapp);
+        whatsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String pesan = isi;
+                String nomer = NoWa;
+
+                Intent kirimWA = new Intent(Intent.ACTION_SEND);
+                kirimWA.setType("text/plain");
+                kirimWA.putExtra(Intent.EXTRA_TEXT, pesan);
+                kirimWA.putExtra("jid", nomer + "@s.whatsapp.net");
+                kirimWA.setPackage("com.whatsapp");
+
+                startActivity(kirimWA);
+            }
+        });
+    }
     public void onTaskCompleted(String response, int serviceCode) {
         Log.d("responsejson", response.toString());
         switch (serviceCode) {
@@ -148,17 +150,20 @@ public class dashboard_main extends AppCompatActivity {
         ArrayList<ProductModel> productModelArrayList = new ArrayList<>();
         try {
             JSONObject jsonObject = new JSONObject(response);
+            ProductModel productModel = new ProductModel();
+            String nomorWhatsapp = jsonObject.getString("nomor");
+            String isiWhatsapp = jsonObject.getString("isi");
+            sendWhatsapp(nomorWhatsapp,isiWhatsapp);
             if (jsonObject.getString("status").equals("true")) {
 
                 JSONArray dataArray = jsonObject.getJSONArray("data");
 
                 for (int i = 0; i < dataArray.length(); i++) {
-
-                    ProductModel playersModel = new ProductModel();
+                    ProductModel productsModel = new ProductModel();
                     JSONObject dataobj = dataArray.getJSONObject(i);
-                    playersModel.setUrl(dataobj.getString("link"));
-                    playersModel.setImgURL(dataobj.getString("gambar"));
-                    productModelArrayList.add(playersModel);
+                    productsModel.setUrl(dataobj.getString("link"));
+                    productsModel.setImgURL(dataobj.getString("gambar"));
+                    productModelArrayList.add(productsModel);
 
                 }
             }
