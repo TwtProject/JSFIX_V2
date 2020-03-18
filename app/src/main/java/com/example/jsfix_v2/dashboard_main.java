@@ -32,7 +32,7 @@ import java.util.TimerTask;
 public class dashboard_main extends AppCompatActivity {
     private CardView whatsapp, img1;
     ViewPager viewPager;
-    int images[] = {R.drawable.pic1 , R.drawable.pic2, R.drawable.pic3};
+    int images[] = {R.drawable.slider1, R.drawable.slider2};
     int currentPageCnt = 0;
     private String jsonURL = "https://maxisolutech.com/JSFIX_V2/api-routes.php";
     private final int jsoncode = 1;
@@ -122,9 +122,8 @@ public class dashboard_main extends AppCompatActivity {
                     removeSimpleProgressDialog();  //will remove progress dialog
                     productModelArrayList = getInfo(response);
                     productAdapter = new ProductAdapter(this,productModelArrayList);
+                    recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
                     recyclerView.setAdapter(productAdapter);
-                    GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2, LinearLayoutManager.HORIZONTAL, false);
-                    recyclerView.setLayoutManager(gridLayoutManager);
                     recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener(){
                         
                         public void onClick(View view, int position) {

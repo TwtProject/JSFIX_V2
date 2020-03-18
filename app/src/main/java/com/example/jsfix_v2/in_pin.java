@@ -34,7 +34,7 @@ public class in_pin extends AppCompatActivity {
 
                     @Override
                     public void onSuccess(String number) {
-                        Intent intent = new Intent(in_pin.this, dashboard_main.class);
+                        Intent intent = new Intent(in_pin.this, MainActivity.class);
                         startActivity(intent);
                     }
                 });

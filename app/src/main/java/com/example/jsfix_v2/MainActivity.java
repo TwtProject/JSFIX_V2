@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                Intent home = new Intent(MainActivity.this, create_pin.class);
+                Intent home = new Intent(MainActivity.this, dashboard_main.class);
                 startActivity(home);
                 finish();
             }
