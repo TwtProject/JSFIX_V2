@@ -90,21 +90,29 @@
 
 
     </GridLayout>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
-            android:layout_width="410dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp">
 
+
         </androidx.recyclerview.widget.RecyclerView>
+    </GridLayout>
+
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
-            android:layout_height="54dp"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:background="@color/cardview_light_background"
             app:menu="@menu/nav_items">
