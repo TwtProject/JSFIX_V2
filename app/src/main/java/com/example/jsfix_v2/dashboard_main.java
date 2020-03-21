@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -16,9 +15,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
+
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.models.SlideModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,14 +26,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.List;
 
 public class dashboard_main extends AppCompatActivity {
     private CardView whatsapp, img1;
-    ViewPager viewPager;
-    int images[] = {R.drawable.slider1, R.drawable.slider2};
-    int currentPageCnt = 0;
     private String jsonURL = "https://maxisolutech.com/JSFIX_V2/api-routes.php";
     private final int jsoncode = 1;
     private RecyclerView recyclerView;
@@ -47,28 +43,12 @@ public class dashboard_main extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler);
         fetchJSON();
 
-        viewPager = findViewById(R.id.viewpager);
-        viewPager.setAdapter(new slider_adapter(images, dashboard_main.this));
+        ImageSlider imageSlider = findViewById(R.id.slider);
 
-        final Handler handler = new Handler();
-        final Runnable update = new Runnable() {
-            @Override
-            public void run() {
-                if (currentPageCnt == images.length){
-                    currentPageCnt = 0;
-                }
-                viewPager.setCurrentItem(currentPageCnt++, true);
-            }
-        };
-
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(update);
-            }
-        }, 2500, 2500);
-
+        List<SlideModel> slideModels = new ArrayList<>();
+        slideModels.add(new SlideModel(R.drawable.slider1));
+        slideModels.add(new SlideModel(R.drawable.slider2));
+        imageSlider.setImageList(slideModels, true);
     }
     @SuppressLint("StaticFieldLeak")
     private void fetchJSON(){

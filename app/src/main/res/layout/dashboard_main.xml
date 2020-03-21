@@ -8,13 +8,18 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="230dp">
-        <androidx.viewpager.widget.ViewPager
-            android:layout_centerInParent="true"
-            android:id="@+id/viewpager"
+        android:layout_height="250dp">
+        <com.denzcoskun.imageslider.ImageSlider
+            android:id="@+id/slider"
+            app:placeholder="@drawable/slider1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </androidx.viewpager.widget.ViewPager>
+            android:layout_height="match_parent"
+            app:auto_cycle="true"
+            app:delay="0"
+            app:period="1000"
+            app:corner_radius="20">
+
+        </com.denzcoskun.imageslider.ImageSlider>
     </RelativeLayout>
 
 
@@ -92,31 +97,24 @@
     </GridLayout>
     <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
         android:layout_gravity="top|center">
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp">
-
-
+            android:layout_marginTop="10dp">
         </androidx.recyclerview.widget.RecyclerView>
     </GridLayout>
-
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="-50dp"
             android:layout_alignParentBottom="true"
             android:background="@color/cardview_light_background"
             app:menu="@menu/nav_items">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>
-    </RelativeLayout>
+
 </LinearLayout>
