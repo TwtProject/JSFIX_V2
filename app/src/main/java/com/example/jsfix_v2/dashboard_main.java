@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -50,10 +52,20 @@ public class dashboard_main extends AppCompatActivity {
         slideModels.add(new SlideModel(R.drawable.slider2));
         imageSlider.setImageList(slideModels, true);
     }
+    public void checkConnection(){
+        ConnectivityManager manager = (ConnectivityManager)
+                getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = manager.getActiveNetworkInfo();
+        if (null != activeNetwork){
+
+        }else {
+            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+    }
     @SuppressLint("StaticFieldLeak")
     private void fetchJSON(){
 
-        showSimpleProgressDialog(this, "Loading...","Fetching Json",false);
+        showSimpleProgressDialog(this, "Loading","Please Wait..",false);
 
         new AsyncTask<Void, Void, String>(){
             protected String doInBackground(Void[] params) {
@@ -120,7 +132,10 @@ public class dashboard_main extends AppCompatActivity {
                     }));
 
                 }else {
-                    Toast.makeText(dashboard_main.this, getErrorCode(response), Toast.LENGTH_SHORT).show();
+
+                    removeSimpleProgressDialog();
+                    checkConnection();
+//                    Toast.makeText(dashboard_main.this, getErrorCode(response), Toast.LENGTH_SHORT).show();
                 }
         }
     }
@@ -267,5 +282,6 @@ public class dashboard_main extends AppCompatActivity {
 
         void onLongClick(View view, int position);
     }
+
 }
 
